@@ -21,26 +21,27 @@ def verify_manager(username, password):
     "Laviosa": ":)"
   }
   for manager in managers:
-    if username == manager:
-      if managers[username] == managers[manager]:
-        print(f"Hello {username}! ")
-        while True:
-          manager_action = input("What do you want to do? (add workers/remove workers/exit manager mode): ")
-          if manager_action == "add workers":
-            worker_name = input("Name?: ")
-            worker_password = input("Worker password?: ")
-            workers[worker_name] = worker_password 
-            print("Worker has been successfully added")
-            print(f"Updated worker dictionary: {workers}")
-          elif manager_action == 'remove workers':
-            del workers[input("Name?: ")]
-            print("Worker has been successfully removed")
-            print(f"Updated worker dictionary: {workers}")
-          elif manager_action == 'exit':
-            print("Bye")
-            break
-          else:
-            print("I don't understand.")     
+    if username == manager and managers[username] == managers[manager]:
+      print(f"Hello {username}! ")
+      while True:
+        manager_action = input("What do you want to do? (add workers/remove workers/exit manager mode): ")
+        if manager_action == "add workers":
+          worker_name = input("Name?: ")
+          worker_password = input("Worker password?: ")
+          workers[worker_name] = worker_password 
+          print("Worker has been successfully added")
+          print(f"Updated worker dictionary: {workers}")
+        elif manager_action == 'remove workers':
+          del workers[input("Name?: ")]
+          print("Worker has been successfully removed")
+          print(f"Updated worker dictionary: {workers}")
+        elif manager_action == 'exit':
+          print("Bye")
+          break
+        else:
+          print("I don't understand.") 
+    elif managers[username] != managers[manager]:
+      print("Get outta here.") 
 def transaction(coffee_wanted):
   """Takes, refunds or gives back the money given by the user"""
   cost = {
