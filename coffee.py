@@ -1,6 +1,7 @@
 # Write your code here
 from time import sleep
-
+from art import logo
+print(logo)
 water=400
 milk=540
 coffee_beans=120
