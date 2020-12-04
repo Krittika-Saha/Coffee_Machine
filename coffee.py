@@ -26,7 +26,7 @@ def transaction(coffee_wanted):
   if total_money == cost[coffee_wanted]:
     return True
   if total_money > cost[coffee_wanted]:
-    print(f"Here is your refund, ${cost[coffee_wanted]-total_money}")
+    print(f"Here is your refund, ${total_money-cost[coffee_wanted]}")
     return True
   elif total_money < cost[coffee_wanted]:
     return False
