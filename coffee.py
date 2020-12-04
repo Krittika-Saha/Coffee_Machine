@@ -7,6 +7,39 @@ coffee_beans=120
 money=550
 disposable_cups=9
 
+workers = {
+    "Richard": "callmerichard",
+    "Amy": "qwerty",
+    "Sara": "1234"
+}
+
+def verify_manager(username, password):
+  global workers
+  managers = {
+    "John": "managerjohn",
+    "Laviosa": ":)"
+  }
+  for manager in managers:
+    if username == manager:
+      if managers[username] == managers[manager]:
+        print(f"Hello {username}! ")
+        while True:
+          manager_action = input("What do you want to do? (add workers/remove workers/exit manager mode): ")
+          if manager_action == "add workers":
+            worker_name = input("Name?: ")
+            worker_password = input("Worker password?: ")
+            workers[worker_name] = worker_password 
+            print("Worker has been successfully added")
+            print(f"Updated worker dictionary: {workers}")
+          elif manager_action == 'remove workers':
+            del workers[input("Name?: ")]
+            print("Worker has been successfully removed")
+            print(f"Updated worker dictionary: {workers}")
+          elif manager_action == 'exit':
+            print("Bye")
+            break
+          else:
+            print("I don't understand.")     
 def transaction(coffee_wanted):
   """Takes, refunds or gives back the money given by the user"""
   cost = {
@@ -21,26 +54,21 @@ def transaction(coffee_wanted):
   pennies = int(input("How many pennies?: "))/100
   nickels= (int(input("How many nickels?: "))/100)*5
   dimes = int(input("How many dimes?: "))/10
-  quarters = (int(input("How many quaters?: "))/10)*25
+  quarters = (int(input("How many quarters?: "))/100)*25
   total_money = pennies + nickels +dimes + quarters
+  print(f"You gave {total_money}")
   if total_money == cost[coffee_wanted]:
     return True
-  if total_money > cost[coffee_wanted]:
+  elif total_money > cost[coffee_wanted]:
     print(f"Here is your refund, ${total_money-cost[coffee_wanted]}")
     return True
   elif total_money < cost[coffee_wanted]:
     return False
 def verify(user, password):
-  users = {
-    "Richard": "callmerichard",
-    "Amy": "qwerty",
-    "Sara": "1234"
-
-  }
-
-  for user_checker in users:
-    if user_checker == user:
-      if users[user_checker] == users[user]:
+  """Verifies if a person is a worker or not."""
+  for worker_checker in workers:
+    if worker_checker == user:
+      if workers[worker_checker] == workers[user]:
         return True
 def change_qty(water2,milk2,coffee_beans2,disposable_cups2,money2):
   """Changes the amount of water, milk, coffee, cups and money"""
@@ -60,7 +88,7 @@ ${money} of money
 {disposable_cups} disposable cups''')
 def actions():
   """Starting input"""
-  choose_action = input("Write action (buy, fill, take, report, exit):") 
+  choose_action = input("Write action (buy, fill, take, report, exit, manage):") 
   return choose_action
 def check_cups():
   """Checks how many cups are left"""
@@ -68,8 +96,7 @@ def check_cups():
     print("Sorry, not enough disposable cups!")
 def buy():
   """Helps the users buy a coffee"""
-  print("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back - to main menu:")
-  coffee_type = input()
+  coffee_type = input("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back - to main menu:")
   if coffee_type == "3":
       check_cups()
       if water < 200:
@@ -152,6 +179,9 @@ while True:
   elif action == "report":
       print_status()
   elif action == "exit":
+      print("Bye! See you soon!")
       break
+  elif action == 'manage':
+      verify_manager(input("Your name: "), input("Your password: "))
   else:
     print("I don't understand.")
