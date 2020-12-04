@@ -14,7 +14,10 @@ def transaction(coffee_wanted):
     "latte": 2.5,
     'cappucino': 3.0
   }
-  print(f"You wanted a {coffee_wanted}. The cost is ${cost[coffee_wanted]}.")
+  if coffee_wanted == 'espresso':
+    print(f"You wanted an espresso. The cost is $1.5.")
+  else:
+    print(f"You wanted a {coffee_wanted}. The cost is ${cost[coffee_wanted]}.")
   pennies = int(input("How many pennies?: "))/100
   nickels= (int(input("How many nickels?: "))/100)*5
   dimes = int(input("How many dimes?: "))/10
