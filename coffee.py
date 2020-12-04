@@ -56,8 +56,8 @@ def print_status():
 {water} ml of water
 {milk} ml  of milk
 {coffee_beans} g of coffee beans
-${money} of mo
-{disposable_cups} disposable cupsney''')
+${money} of money
+{disposable_cups} disposable cups''')
 def actions():
   """Starting input"""
   choose_action = input("Write action (buy, fill, take, report, exit):") 
